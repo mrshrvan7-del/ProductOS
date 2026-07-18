@@ -14,7 +14,8 @@ import {
   Users, 
   Search,
   Sparkles,
-  ChevronDown
+  ChevronDown,
+  ClipboardList
 } from "lucide-react";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -89,6 +90,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { name: "Approvals & Sign-offs", href: "/dashboard/approvals", icon: CheckSquare },
     { name: "Risks & Dependencies", href: "/dashboard/risks", icon: AlertTriangle },
     { name: "Meeting Intel", href: "/dashboard/meetings", icon: Sparkles },
+    { name: "Ask ProductOS", href: "/dashboard/search", icon: Search },
+    { name: "Status Reports", href: "/dashboard/reports", icon: ClipboardList },
   ];
 
   return (
