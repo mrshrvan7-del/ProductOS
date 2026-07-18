@@ -123,3 +123,53 @@ class Decision(DecisionBase):
     
     class Config:
         from_attributes = True
+
+# --- Risk (Phase 2) ---
+class RiskBase(BaseModel):
+    title: str
+    severity: str  # low, medium, high, critical
+    owner: str
+    status: str = "open"  # open, mitigated, closed
+    mitigation: Optional[str] = None
+
+class RiskCreate(RiskBase):
+    project_id: int
+
+class RiskUpdate(BaseModel):
+    title: Optional[str] = None
+    severity: Optional[str] = None
+    owner: Optional[str] = None
+    status: Optional[str] = None
+    mitigation: Optional[str] = None
+
+class Risk(RiskBase):
+    id: int
+    project_id: int
+    created_at: datetime.datetime
+    
+    class Config:
+        from_attributes = True
+
+# --- Dependency (Phase 2) ---
+class DependencyBase(BaseModel):
+    from_team: str
+    to_team: str
+    description: str
+    status: str = "active"  # active, resolved, blocked
+
+class DependencyCreate(DependencyBase):
+    project_id: int
+
+class DependencyUpdate(BaseModel):
+    from_team: Optional[str] = None
+    to_team: Optional[str] = None
+    description: Optional[str] = None
+    status: Optional[str] = None
+
+class Dependency(DependencyBase):
+    id: int
+    project_id: int
+    created_at: datetime.datetime
+    
+    class Config:
+        from_attributes = True

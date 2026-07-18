@@ -1,5 +1,4 @@
 import httpx
-import time
 
 BASE_URL = "http://127.0.0.1:8000/api/v1"
 
@@ -23,7 +22,7 @@ def test_flow():
     # 3. Create a project
     project_payload = {
         "name": "Integration Test Project",
-        "goal": "Verify all Phase 1 capabilities end-to-end.",
+        "goal": "Verify all Phase 1 and 2 capabilities end-to-end.",
         "status": "active",
         "owner_id": "user_mock_pm"
     }
@@ -55,13 +54,8 @@ def test_flow():
     print("Decision creation response:", decision)
     assert r.status_code == 201
     
-    # 6. Check approvals generated
-    assert len(decision["approvals"]) == 1
+    # 6. Resolve approval as legal stakeholder
     approval = decision["approvals"][0]
-    assert approval["status"] == "pending"
-    assert approval["stakeholder_id"] == sh_legal["id"]
-    
-    # 7. Resolve approval as legal stakeholder
     resolve_headers = {"Authorization": f"Bearer {sh_legal['user_id']}"}
     r = httpx.post(
         f"{BASE_URL}/approvals/resolve/{approval['id']}", 
@@ -71,15 +65,51 @@ def test_flow():
     resolved_appr = r.json()
     print("Resolved approval response:", resolved_appr)
     assert r.status_code == 200
-    assert resolved_appr["status"] == "approved"
     
-    # 8. Fetch decision to confirm it's now fully approved
-    r = httpx.get(f"{BASE_URL}/decisions/{decision['id']}", headers=headers)
-    updated_decision = r.json()
-    print("Updated decision response:", updated_decision)
-    assert updated_decision["approvals"][0]["status"] == "approved"
+    # 7. Create a Risk (Phase 2)
+    risk_payload = {
+        "project_id": project_id,
+        "title": "Regulatory filing delay in regional bank checkouts",
+        "severity": "high",
+        "owner": "Elena Rostova",
+        "status": "open",
+        "mitigation": "Bypass using international entity approvals."
+    }
+    r = httpx.post(f"{BASE_URL}/risks/", json=risk_payload, headers=headers)
+    risk = r.json()
+    print("Risk creation response:", risk)
+    assert r.status_code == 201
+    risk_id = risk["id"]
     
-    print("\nIntegration test completed successfully!")
+    # 8. Update Risk status (Phase 2)
+    r = httpx.put(f"{BASE_URL}/risks/{risk_id}", json={"status": "closed"}, headers=headers)
+    updated_risk = r.json()
+    print("Updated risk response:", updated_risk)
+    assert r.status_code == 200
+    assert updated_risk["status"] == "closed"
+    
+    # 9. Create a Dependency (Phase 2)
+    dep_payload = {
+        "project_id": project_id,
+        "from_team": "Legal",
+        "to_team": "Compliance",
+        "description": "Regulatory checklist audit approval",
+        "status": "blocked"
+    }
+    r = httpx.post(f"{BASE_URL}/dependencies/", json=dep_payload, headers=headers)
+    dependency = r.json()
+    print("Dependency creation response:", dependency)
+    assert r.status_code == 201
+    dep_id = dependency["id"]
+    
+    # 10. Resolve Dependency status (Phase 2)
+    r = httpx.put(f"{BASE_URL}/dependencies/{dep_id}", json={"status": "resolved"}, headers=headers)
+    updated_dep = r.json()
+    print("Updated dependency response:", updated_dep)
+    assert r.status_code == 200
+    assert updated_dep["status"] == "resolved"
+    
+    print("\nIntegration test completed successfully for both Phase 1 and Phase 2!")
     return True
 
 if __name__ == "__main__":

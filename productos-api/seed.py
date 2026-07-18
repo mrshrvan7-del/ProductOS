@@ -135,6 +135,76 @@ def seed_db():
                 db.commit()
                 print(f"Added pending approvals to decision: {dec['title']}")
                 
+    # 6. Seed Risks
+    risks_list = [
+        {
+            "title": "Stripe Elements integration delay due to regional regulatory bank approvals",
+            "severity": "high",
+            "owner": "Dave Miller",
+            "status": "open",
+            "mitigation": "Submit fallback verification requests using local entity details."
+        },
+        {
+            "title": "Security compliance check queue backlog",
+            "severity": "medium",
+            "owner": "Marcus Vance",
+            "status": "open",
+            "mitigation": "Pre-schedule compliance sync meetings twice a week."
+        }
+    ]
+    
+    for r in risks_list:
+        db_risk = db.query(models.Risk).filter(
+            models.Risk.project_id == project.id,
+            models.Risk.title == r["title"]
+        ).first()
+        if not db_risk:
+            db_risk = models.Risk(
+                project_id=project.id,
+                title=r["title"],
+                severity=r["severity"],
+                owner=r["owner"],
+                status=r["status"],
+                mitigation=r["mitigation"]
+            )
+            db.add(db_risk)
+            db.commit()
+            print(f"Seeded Risk: {r['title']}")
+            
+    # 7. Seed Dependencies
+    dependencies_list = [
+        {
+            "from_team": "Engineering",
+            "to_team": "Security",
+            "description": "Compliance clearance for regional checkout inputs",
+            "status": "active"
+        },
+        {
+            "from_team": "Security",
+            "to_team": "Legal",
+            "description": "Privacy policy terms sign-off for EU region",
+            "status": "blocked"
+        }
+    ]
+    
+    for dep in dependencies_list:
+        db_dep = db.query(models.Dependency).filter(
+            models.Dependency.project_id == project.id,
+            models.Dependency.from_team == dep["from_team"],
+            models.Dependency.to_team == dep["to_team"]
+        ).first()
+        if not db_dep:
+            db_dep = models.Dependency(
+                project_id=project.id,
+                from_team=dep["from_team"],
+                to_team=dep["to_team"],
+                description=dep["description"],
+                status=dep["status"]
+            )
+            db.add(db_dep)
+            db.commit()
+            print(f"Seeded Dependency: {dep['from_team']} -> {dep['to_team']}")
+            
     db.close()
     print("Database seeding completed successfully.")
 

@@ -87,6 +87,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
     { name: "Decision Log", href: "/dashboard/decisions", icon: FileText },
     { name: "Approvals & Sign-offs", href: "/dashboard/approvals", icon: CheckSquare },
+    { name: "Risks & Dependencies", href: "/dashboard/risks", icon: AlertTriangle },
   ];
 
   return (
