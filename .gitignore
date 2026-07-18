@@ -4,17 +4,24 @@ productos-web/.next/
 productos-web/out/
 productos-web/build/
 productos-web/tsconfig.tsbuildinfo
-productos-web/.env.local
-productos-web/.env.production.local
-productos-web/.env.development.local
-productos-web/.env.test.local
 
 # Python environment and dependencies
 productos-api/.venv/
 **/__pycache__/
 **/*.pyc
 productos-api/local_database.db
-productos-api/.env
+
+# Environments (Force ignore all configuration and secret files)
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+**/.env.*.local
+**/*.env
+**/*.env.*
+.env
+.env.*
 
 # Local logs and OS files
 *.log
