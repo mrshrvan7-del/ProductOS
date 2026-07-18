@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.db.session import engine
 from app.models.base import Base
-from app.api.v1 import auth, projects, decisions, approvals, risks, dependencies, meetings
+from app.api.v1 import auth, projects, decisions, approvals, risks, dependencies, meetings, search, reports
 
 # Automatically create tables for SQLite/PostgreSQL on startup.
 # In a full-blown production environment, Alembic migrations should be used.
@@ -36,6 +36,8 @@ app.include_router(approvals.router, prefix=f"{settings.API_V1_STR}/approvals", 
 app.include_router(risks.router, prefix=f"{settings.API_V1_STR}/risks", tags=["risks"])
 app.include_router(dependencies.router, prefix=f"{settings.API_V1_STR}/dependencies", tags=["dependencies"])
 app.include_router(meetings.router, prefix=f"{settings.API_V1_STR}/meetings", tags=["meetings"])
+app.include_router(search.router, prefix=f"{settings.API_V1_STR}/search", tags=["search"])
+app.include_router(reports.router, prefix=f"{settings.API_V1_STR}/reports", tags=["reports"])
 
 @app.get("/")
 def read_root():

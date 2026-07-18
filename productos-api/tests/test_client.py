@@ -99,8 +99,29 @@ def test_full_flow():
     latest_decision = [d for d in decisions_list if d["source"] == "meeting_extraction"][0]
     assert len(latest_decision["approvals"]) == 1
     assert latest_decision["approvals"][0]["status"] == "pending"
-    print("Automated sign-off triggers: PASS")
-    
+    # 8. RAG Search Query
+    search_payload = {
+        "project_id": project_id,
+        "query": "Why did we choose Stripe Elements?"
+    }
+    r = client.post("/api/v1/search/", json=search_payload, headers=headers)
+    assert r.status_code == 200
+    search_res = r.json()
+    assert "answer" in search_res
+    assert len(search_res["citations"]) > 0
+    print("RAG Search query check: PASS")
+
+    # 9. AI Executive Report Generation
+    report_payload = {
+        "project_id": project_id
+    }
+    r = client.post("/api/v1/reports/generate", json=report_payload, headers=headers)
+    assert r.status_code == 200
+    report_res = r.json()
+    assert "report_markdown" in report_res
+    assert "Executive Summary" in report_res["report_markdown"]
+    print("AI Report generation check: PASS")
+
     print("\nAll in-process API tests completed successfully with zero errors!")
 
 if __name__ == "__main__":
