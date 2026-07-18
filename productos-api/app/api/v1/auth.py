@@ -21,11 +21,11 @@ def get_mock_users(db: Session = Depends(get_db)):
     Returns a pre-defined list of mock users for easy toggling in the UI.
     """
     mock_users_list = [
-        {"id": "user_mock_pm", "name": "Sarah Jenkins (PM)", "email": "sarah.pm@productos.local", "role": "pm"},
-        {"id": "user_mock_legal", "name": "Elena Rostova (Legal Lead)", "email": "elena.legal@productos.local", "role": "stakeholder"},
-        {"id": "user_mock_security", "name": "Marcus Vance (Security head)", "email": "marcus.security@productos.local", "role": "stakeholder"},
-        {"id": "user_mock_eng", "name": "Dave Miller (Engineering Lead)", "email": "dave.eng@productos.local", "role": "stakeholder"},
-        {"id": "user_mock_exec", "name": "Robert Chen (VP Product)", "email": "robert.exec@productos.local", "role": "viewer"}
+        {"id": "user_mock_pm", "name": "Sarah Jenkins (PM)", "email": "sarah.pm@productos.com", "role": "pm"},
+        {"id": "user_mock_legal", "name": "Elena Rostova (Legal Lead)", "email": "elena.legal@productos.com", "role": "stakeholder"},
+        {"id": "user_mock_security", "name": "Marcus Vance (Security head)", "email": "marcus.security@productos.com", "role": "stakeholder"},
+        {"id": "user_mock_eng", "name": "Dave Miller (Engineering Lead)", "email": "dave.eng@productos.com", "role": "stakeholder"},
+        {"id": "user_mock_exec", "name": "Robert Chen (VP Product)", "email": "robert.exec@productos.com", "role": "viewer"}
     ]
     
     # Auto-seed mock users so they exist in the DB

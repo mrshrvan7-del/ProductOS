@@ -20,11 +20,11 @@ def seed_db():
         
     # 2. Seed Mock Users
     mock_users_list = [
-        {"id": "user_mock_pm", "name": "Sarah Jenkins", "email": "sarah.pm@productos.local", "role": "pm"},
-        {"id": "user_mock_legal", "name": "Elena Rostova", "email": "elena.legal@productos.local", "role": "stakeholder"},
-        {"id": "user_mock_security", "name": "Marcus Vance", "email": "marcus.security@productos.local", "role": "stakeholder"},
-        {"id": "user_mock_eng", "name": "Dave Miller", "email": "dave.eng@productos.local", "role": "stakeholder"},
-        {"id": "user_mock_exec", "name": "Robert Chen", "email": "robert.exec@productos.local", "role": "viewer"}
+        {"id": "user_mock_pm", "name": "Sarah Jenkins", "email": "sarah.pm@productos.com", "role": "pm"},
+        {"id": "user_mock_legal", "name": "Elena Rostova", "email": "elena.legal@productos.com", "role": "stakeholder"},
+        {"id": "user_mock_security", "name": "Marcus Vance", "email": "marcus.security@productos.com", "role": "stakeholder"},
+        {"id": "user_mock_eng", "name": "Dave Miller", "email": "dave.eng@productos.com", "role": "stakeholder"},
+        {"id": "user_mock_exec", "name": "Robert Chen", "email": "robert.exec@productos.com", "role": "viewer"}
     ]
     
     users = {}

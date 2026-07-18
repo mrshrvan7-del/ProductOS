@@ -73,7 +73,7 @@ def get_current_user(
                 id=user_id,
                 org_id=org_id,
                 name=name,
-                email=f"{user_id}@productos.local",
+                email=f"{user_id}@productos.com",
                 role=role
             )
             db.add(user)
