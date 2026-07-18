@@ -22,7 +22,7 @@ def test_flow():
     # 3. Create a project
     project_payload = {
         "name": "Integration Test Project",
-        "goal": "Verify all Phase 1 and 2 capabilities end-to-end.",
+        "goal": "Verify all Phase 1, 2, and 3 capabilities end-to-end.",
         "status": "active",
         "owner_id": "user_mock_pm"
     }
@@ -108,8 +108,58 @@ def test_flow():
     print("Updated dependency response:", updated_dep)
     assert r.status_code == 200
     assert updated_dep["status"] == "resolved"
+
+    # 11. Run AI Meeting Extraction (Phase 3)
+    transcript_payload = {
+        "project_id": project_id,
+        "transcript": "Let's migrate regional checkout inputs to Stripe Elements. We also need Elena to draft EU disclaimer by July 28."
+    }
+    r = httpx.post(f"{BASE_URL}/meetings/extract", json=transcript_payload, headers=headers)
+    extracted_outcomes = r.json()
+    print("AI Extracted outcomes:", extracted_outcomes)
+    assert r.status_code == 200
+    assert len(extracted_outcomes["decisions"]) > 0
     
-    print("\nIntegration test completed successfully for both Phase 1 and Phase 2!")
+    # 12. Persist AI Extracted Outcomes (Phase 3)
+    persist_payload = {
+        "project_id": project_id,
+        "summary": extracted_outcomes["summary"],
+        "decisions": [
+            {
+                "title": extracted_outcomes["decisions"][0]["title"],
+                "description": extracted_outcomes["decisions"][0]["description"],
+                "decided_by": extracted_outcomes["decisions"][0]["decided_by"],
+                "linked_goal": extracted_outcomes["decisions"][0].get("linked_goal"),
+                "stakeholder_ids": [sh_legal["id"]]  # request legal signoff on this extracted decision!
+            }
+        ],
+        "action_items": [
+            {
+                "description": extracted_outcomes["action_items"][0]["description"],
+                "owner": extracted_outcomes["action_items"][0]["owner"],
+                "due_date": extracted_outcomes["action_items"][0].get("due_date")
+            }
+        ],
+        "risks": [
+            {
+                "title": extracted_outcomes["risks"][0]["title"],
+                "severity": extracted_outcomes["risks"][0]["severity"],
+                "owner": extracted_outcomes["risks"][0]["owner"],
+                "mitigation": extracted_outcomes["risks"][0].get("mitigation")
+            }
+        ]
+    }
+    
+    r = httpx.post(f"{BASE_URL}/meetings/persist", json=persist_payload, headers=headers)
+    persist_response = r.json()
+    print("Persist response:", persist_response)
+    assert r.status_code == 201
+    assert persist_response["status"] == "success"
+    assert persist_response["decisions_created"] == 1
+    assert persist_response["action_items_created"] == 1
+    assert persist_response["risks_created"] == 1
+    
+    print("\nIntegration test completed successfully for Phase 1, Phase 2, and Phase 3!")
     return True
 
 if __name__ == "__main__":
