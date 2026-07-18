@@ -6,13 +6,19 @@ def seed_github():
     print("  ProductOS - GitHub Project & Issues Seeder        ")
     print("====================================================\n")
     
-    # Get user credentials securely
-    token = input("Enter your GitHub Personal Access Token (PAT): ").strip()
+    # Get user credentials securely (checking environment first)
+    import os
+    token = os.getenv("GITHUB_TOKEN", "").strip()
+    if not token:
+        token = input("Enter your GitHub Personal Access Token (PAT): ").strip()
+        
     if not token:
         print("Error: GitHub PAT is required.")
         return
         
-    repo = input("Enter your repository (default: mrshrvan7-del/ProductOS): ").strip()
+    repo = os.getenv("GITHUB_REPO", "").strip()
+    if not repo:
+        repo = input("Enter your repository (default: mrshrvan7-del/ProductOS): ").strip()
     if not repo:
         repo = "mrshrvan7-del/ProductOS"
         
