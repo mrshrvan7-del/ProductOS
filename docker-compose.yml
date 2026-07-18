@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./productos-api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - MOCK_AUTH_MODE=True
+      - DATABASE_URL=sqlite:///local_database.db
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    volumes:
+      - backend_data:/app
+
+  frontend:
+    build:
+      context: ./productos-web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - backend
+
+volumes:
+  backend_data:
