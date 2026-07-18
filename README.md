@@ -1,82 +1,120 @@
-# ProductOS — Product Decision Intelligence & Operations Platform
+# 🧠 ProductOS
+### *The Decision Intelligence Layer for Product Teams*
 
-ProductOS is a centralized, high-fidelity operations and decision-governance platform designed for Product Managers, engineering leads, and stakeholders. Instead of tracking *what* tasks need to be done (which execution tools like Jira already do well), ProductOS tracks *why* decisions were made, maps cross-team dependencies, flags delivery risks, and calculates overall release health in real time.
-
----
-
-## 🚀 Key Features (Phase 1 & 2)
-
-- **Decision Journal & Log**: A timeline showing structural product decisions, contextual rationale, linked strategic goals, and formal stakeholder sign-off status.
-- **Interactive SVG Dependency Flow**: A custom-built, responsive visual map showing team relationships (Legal, Security, Engineering, Compliance) connected by animated, color-coded lines. Blocked pathways are automatically highlighted in red.
-- **Risk Exposure Heatmap**: A 2x2 risk matrix categorizing open risks by severity (Critical, High, Medium, Low) to track mitigations and owners.
-- **Delivery Confidence Engine**: A mathematical calculation engine that computes a percentage-based health index for initiatives:
-  $$\text{Confidence} = \max\left(0,\, 100 - (5D + 5M + 10H + 20C + 15B)\right)$$
-  - *D = Pending Decisions, M = Medium Risks, H = High Risks, C = Critical Risks, B = Blocked Dependencies*
-- **Persona Demo Switcher**: A dropdown menu allowing users to switch between Product Manager, Legal, Security, and Engineering personas to test stakeholder sign-offs interactively.
+[![Next.js](https://img.shields.io/badge/Frontend-Next.js%2014-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![TailwindCSS](https://img.shields.io/badge/Styling-Tailwind%20v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 ---
 
-## 🛠️ Technology Stack
+## ⚡ The Hook
+> **Product work is not failing because teams lack task management software. It is failing because critical product decisions, risk context, and stakeholder alignments are buried across Slack channels, emails, and spreadsheet tabs.**
 
-- **Frontend**: Next.js (App Router), TypeScript, Tailwind CSS, TanStack Query, Zustand, and Custom SVG Flow rendering.
-- **Backend**: FastAPI (Python 3.11+), SQLAlchemy 2.0.
-- **Database**: SQLite (default local fallback for zero-configuration testing) or PostgreSQL.
+When a key feature is removed or a milestone slips, six months later nobody remembers *why*, *who approved it*, or *what dependency caused it*. 
+
+**ProductOS** solves this. It sits *above* task execution tools (like Jira or GitHub Issues) and acts as the **central operational memory layer** for product operations.
 
 ---
 
-## ⚙️ Quick Start
+## 🎯 The Core Problem & Our Solution
 
-### 1. Prerequisite: Seed the Database
-Ensure the local SQLite database is populated with initial mock organizations, projects, decisions, and stakeholders:
+```mermaid
+graph TD
+    subgraph Fragmented Reality [The Scattered Stack]
+        A[Slack Chat] --- B[Excel Risks]
+        B --- C[Confluence Docs]
+        C --- D[Jira Tasks]
+    end
+
+    subgraph ProductOS Layer [ProductOS: The Intelligence Layer]
+        PO[🧠 ProductOS]
+    end
+
+    Fragmented Reality -->|Unified Context| PO
+    PO -->|Actionable Overview| E[Leadership & Stakeholders]
+```
+
+### ❌ The Old Way
+- **Scattered Context**: Decisions are made in Slack, risks are tracked in Excel, requirements live in Confluence, and tasks live in Jira.
+- **Information Decay**: When a Product Manager leaves, organizational context and decision history leave with them.
+- **Reporting Overhead**: PMs waste up to 8 hours a week manually copy-pasting status updates for stakeholders.
+
+###   The ProductOS Way
+- **Decision Traceability**: Every critical pivot is a structured, searchable record linked to approvals, goals, and risks.
+- **Real-Time Cross-Team Flow**: Cross-team blockers are instantly mapped in a high-fidelity interactive dependency chart.
+- **Automated Health Engine**: Release confidence is computed mathematically using live data, eliminating subjective "green/yellow/red" status reports.
+
+---
+
+## 🔥 Product Features (Phase 1 & 2 Demo)
+
+### 1. 📓 The Decision Journal
+A chronological feed of structural product decisions. Document *why* things were prioritized, link them to business objectives, and request approvals with built-in audit trails.
+
+### 2. 🕸️ Interactive SVG Dependency Flow
+A visual dependency map of cross-team workflows (Legal, Security, Engineering, Compliance). Path lines animate and glow based on connection health:
+- **Green**: Resolved dependency path.
+- **Yellow/Blue**: Active data flow.
+- **Red (Blinking)**: Blocked delivery path.
+
+### 3. 📈 Delivery Confidence Engine
+Calculates the statistical likelihood of release success by applying logical weight-based deductions to active blockers:
+$$\text{Confidence} = \max\left(0,\, 100 - (5D + 5M + 10H + 20C + 15B)\right)$$
+*Where: D = Pending Decisions, M = Medium Risks, H = High Risks, C = Critical Risks, B = Blocked Dependencies.*
+
+### 4. 🎭 Persona Demo Switcher
+Switch roles instantly in the UI between **Sarah (PM)**, **Elena (Legal)**, **Marcus (Security)**, and **Dave (Eng)**. Reviewers can log decisions as a PM, switch to Legal, and approve the clearance item on the fly!
+
+---
+
+## 📈 Startup Value Metrics
+
+| Metric | Target Impact |
+|---|---|
+| ⏱️ **Weekly Status Prep** | **-80%** time spent preparing reports |
+| 🔍 **Information Retrieval** | **-60%** time spent searching for context |
+| 🔎 **Decision Traceability** | **100%** searchable system of record |
+| 🛡️ **Risk Prevention** | **Proactive flagging** of cross-team blockers |
+
+---
+
+## 🚀 Interactive Quick Start
+
+<details>
+<summary><b>1. Run the Backend API</b></summary>
+
 ```bash
 cd productos-api
+# Activate venv
 .\.venv\Scripts\activate
+# Seed mock database
 python seed.py
-```
-
-### 2. Run the Backend API
-Start the FastAPI server:
-```bash
+# Boot FastAPI development server
 uvicorn app.main:app --reload
 ```
-- The backend API will be available at `http://127.0.0.1:8000`
-- Swagger documentation is accessible at `http://127.0.0.1:8000/docs`
+- API Endpoint: `http://127.0.0.1:8000`
+- Interactive Swagger docs: `http://127.0.0.1:8000/docs`
+- Local Data Inspection: stored in [local_database.db](productos-api/local_database.db) (SQLite).
+</details>
 
-### 3. Run the Next.js Frontend
-Start the Next.js development server:
+<details>
+<summary><b>2. Run the Next.js Web App</b></summary>
+
 ```bash
-cd ../productos-web
+cd productos-web
+# Run development server
 npm run dev
 ```
-- Access the workspace UI at `http://127.0.0.1:3000`
+- Frontend Access: `http://127.0.0.1:3000`
+</details>
 
-### 4. Run End-to-End Integration Tests
-Verify database schema validation, endpoints, and confidence scoring deductions by running the integration test script:
+<details>
+<summary><b>3. Verify with End-to-End Tests</b></summary>
+
+With the API running, trigger our integration suite to test the routing flow automatically:
 ```bash
-cd ../productos-api
+cd productos-api
 python tests/test_endpoints.py
 ```
-
----
-
-## 📂 Repository Structure
-
-```
-├── productos-api/        # FastAPI Python Backend
-│   ├── app/              # FastAPI application core
-│   │   ├── api/          # Route controllers (v1)
-│   │   ├── db/           # Session management
-│   │   ├── models/       # SQLAlchemy models
-│   │   └── schemas/      # Pydantic validation schemas
-│   ├── tests/            # Integration test cases
-│   ├── seed.py           # Database seeder
-│   └── requirements.txt  # Python requirements
-│
-└── productos-web/        # Next.js Frontend
-    ├── public/           # Static asset assets
-    ├── src/
-    │   ├── app/          # App Router components & dashboard views
-    │   ├── components/   # UI elements
-    │   └── store/        # Zustand global client store
-    └── package.json      # Node.js configurations
-```
+</details>
