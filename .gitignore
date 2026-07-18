@@ -1,0 +1,22 @@
+# Next.js build and dependencies
+productos-web/node_modules/
+productos-web/.next/
+productos-web/out/
+productos-web/build/
+productos-web/tsconfig.tsbuildinfo
+productos-web/.env.local
+productos-web/.env.production.local
+productos-web/.env.development.local
+productos-web/.env.test.local
+
+# Python environment and dependencies
+productos-api/.venv/
+productos-api/__pycache__/
+productos-api/*.pyc
+productos-api/local_database.db
+productos-api/.env
+
+# Local logs and OS files
+*.log
+.DS_Store
+Thumbs.db
