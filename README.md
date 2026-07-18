@@ -1,5 +1,5 @@
 # 🧠 ProductOS
-### *The Decision Intelligence Layer for Product Teams*
+### *The AI-Powered Organizational Intelligence & SOP Operating System*
 
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js%2014-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
@@ -8,12 +8,12 @@
 
 ---
 
-## ⚡ The Hook
-> **Product work is not failing because teams lack task management software. It is failing because critical product decisions, risk context, and stakeholder alignments are buried across Slack channels, emails, and spreadsheet tabs.**
+## ⚡ The Hook & Vision
+> **Capture Every Conversation. Understand Every Decision. Build Every Process. Preserve Organizational Knowledge.**
 
-When a key feature is removed or a milestone slips, six months later nobody remembers *why*, *who approved it*, or *what dependency caused it*. 
+ProductOS is an enterprise AI platform that captures, understands, and preserves an organization's collective knowledge. Rather than relying on employees to manually create and maintain documentation, ProductOS continuously analyzes meetings, emails, chats, product discussions, decisions, documents, and operational workflows to automatically generate **living Standard Operating Procedures (SOPs)**, product guides, knowledge bases, training materials, and process documentation.
 
-**ProductOS** solves this. It sits *above* task execution tools (like Jira or GitHub Issues) and acts as the **central operational memory layer** for product operations.
+Serving as the organization's central intelligence layer, ProductOS connects people, products, processes, and decisions into a unified knowledge graph. Every conversation, approval, and workflow becomes searchable, traceable, and reusable, ensuring that critical organizational knowledge is never lost and is always accessible when needed.
 
 ---
 
@@ -21,61 +21,52 @@ When a key feature is removed or a milestone slips, six months later nobody reme
 
 ```mermaid
 graph TD
-    subgraph FragmentedReality ["The Scattered Stack"]
-        A["Slack Chat"] --- B["Excel Risks"]
-        B --- C["Confluence Docs"]
-        C --- D["Jira Tasks"]
+    subgraph Fragmented Reality ["Fragmented Context silos"]
+        A["Slack Threads"] --- B["Spreadsheets"]
+        B --- C["Static PDFs"]
+        C --- D["Unstructured Emails"]
     end
 
-    subgraph ProductOSLayer ["ProductOS: The Intelligence Layer"]
-        PO["🧠 ProductOS"]
+    subgraph ProductOS ["ProductOS Intelligence Layer"]
+        PO["🧠 ProductOS Core Engine"]
+        SOP["Living SOPs & Knowledge Graph"]
+        PO --> SOP
     end
 
-    FragmentedReality -->|Unified Context| PO
-    PO -->|Actionable Overview| E["Leadership & Stakeholders"]
+    Fragmented Reality -->|Continuous AI Parsing| PO
+    SOP -->|Real-Time Process Intelligence| E["Product, Engineering, Operations & HR Teams"]
 ```
 
 ### ❌ The Old Way
-- **Scattered Context**: Decisions are made in Slack, risks are tracked in Excel, requirements live in Confluence, and tasks live in Jira.
-- **Information Decay**: When a Product Manager leaves, organizational context and decision history leave with them.
-- **Reporting Overhead**: PMs waste up to 8 hours a week manually copy-pasting status updates for stakeholders.
+- **Silos & Friction**: Critical process knowledge and decision rationale are scattered across disconnected chats, logs, and docs.
+- **Knowledge Decay**: When key team members depart, historical decisions and operational context leave with them.
+- **Outdated SOPs**: Documentation is created manually and quickly becomes obsolete as workflows adapt.
 
 ###   The ProductOS Way
-- **Decision Traceability**: Every critical pivot is a structured, searchable record linked to approvals, goals, and risks.
-- **Real-Time Cross-Team Flow**: Cross-team blockers are instantly mapped in a high-fidelity interactive dependency chart.
-- **Automated Health Engine**: Release confidence is computed mathematically using live data, eliminating subjective "green/yellow/red" status reports.
+- **Living Process Memory**: Automatically extracts, updates, and versions SOPs and knowledge bases from daily meetings and product discussions.
+- **Structured Knowledge Graph**: Links decisions to objectives, owners, and risks for 100% trace-integrity.
+- **Human-in-the-loop Governance**: AI proposes process optimizations and documentation updates, while managers review and sign off before publication.
 
 ---
 
-## 🔥 Product Features (Phase 1 & 2 Demo)
+## 🔥 Product Features (Phase 1, 2 & 3 Completed)
 
-### 1. 📓 The Decision Journal
-A chronological feed of structural product decisions. Document *why* things were prioritized, link them to business objectives, and request approvals with built-in audit trails.
+### 1. 📓 The Decision Journal & SOP Hub
+A chronological, audit-ready index of structural choices. Connect decisions to strategic goals, assign responsibility, and initiate approval sign-off workflows.
 
 ### 2. 🕸️ Interactive SVG Dependency Flow
-A visual dependency map of cross-team workflows (Legal, Security, Engineering, Compliance). Path lines animate and glow based on connection health:
-- **Green**: Resolved dependency path.
-- **Yellow/Blue**: Active data flow.
-- **Red (Blinking)**: Blocked delivery path.
+A dynamic, zero-dependency visual graph tracking cross-team handoffs (Legal, Security, Engineering, Compliance). Features animated paths color-coded by blocker status (Green = Clear, Yellow = Active, Red = Blocked).
 
 ### 3. 📈 Delivery Confidence Engine
-Calculates the statistical likelihood of release success by applying logical weight-based deductions to active blockers:
+Calculates process stability and delivery confidence automatically using live risk weighting deductions:
 $$\text{Confidence} = \max\left(0,\, 100 - (5D + 5M + 10H + 20C + 15B)\right)$$
-*Where: D = Pending Decisions, M = Medium Risks, H = High Risks, C = Critical Risks, B = Blocked Dependencies.*
+- *D = Pending Decisions, M = Medium Risks, H = High Risks, C = Critical Risks, B = Blocked Dependencies.*
 
-### 4. 🎭 Persona Demo Switcher
-Switch roles instantly in the UI between **Sarah (PM)**, **Elena (Legal)**, **Marcus (Security)**, and **Dave (Eng)**. Reviewers can log decisions as a PM, switch to Legal, and approve the clearance item on the fly!
+### 4. 🎙️ AI Meeting Intelligence (Phase 3)
+Paste meeting transcripts to automatically extract candidate Decisions, Action Items, and Risks. PMs can edit, assign, select approvers, and persist outcomes directly into the organization's knowledge graph.
 
----
-
-## 📈 Startup Value Metrics
-
-| Metric | Target Impact |
-|---|---|
-| ⏱️ **Weekly Status Prep** | **-80%** time spent preparing reports |
-| 🔍 **Information Retrieval** | **-60%** time spent searching for context |
-| 🔎 **Decision Traceability** | **100%** searchable system of record |
-| 🛡️ **Risk Prevention** | **Proactive flagging** of cross-team blockers |
+### 5. 🎭 Persona Demo Switcher
+Toggle roles instantly (Sarah PM, Elena Legal, Dave Eng, Marcus Security) to simulate and present cross-team approval workflows in real time.
 
 ---
 
@@ -94,8 +85,8 @@ python seed.py
 uvicorn app.main:app --reload
 ```
 - API Endpoint: `http://127.0.0.1:8000`
-- Interactive Swagger docs: `http://127.0.0.1:8000/docs`
-- Local Data Inspection: stored in [local_database.db](productos-api/local_database.db) (SQLite).
+- Swagger documentation: `http://127.0.0.1:8000/docs`
+- Local Data: stored in [local_database.db](productos-api/local_database.db).
 </details>
 
 <details>
@@ -112,9 +103,9 @@ npm run dev
 <details>
 <summary><b>3. Verify with End-to-End Tests</b></summary>
 
-With the API running, trigger our integration suite to test the routing flow automatically:
+Verify the API endpoints and database integrity:
 ```bash
 cd productos-api
-python tests/test_endpoints.py
+$env:PYTHONPATH="."; .\.venv\Scripts\python tests/test_client.py
 ```
 </details>
