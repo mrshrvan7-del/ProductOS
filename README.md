@@ -21,18 +21,18 @@ When a key feature is removed or a milestone slips, six months later nobody reme
 
 ```mermaid
 graph TD
-    subgraph Fragmented Reality [The Scattered Stack]
-        A[Slack Chat] --- B[Excel Risks]
-        B --- C[Confluence Docs]
-        C --- D[Jira Tasks]
+    subgraph FragmentedReality ["The Scattered Stack"]
+        A["Slack Chat"] --- B["Excel Risks"]
+        B --- C["Confluence Docs"]
+        C --- D["Jira Tasks"]
     end
 
-    subgraph ProductOS Layer [ProductOS: The Intelligence Layer]
-        PO[🧠 ProductOS]
+    subgraph ProductOSLayer ["ProductOS: The Intelligence Layer"]
+        PO["🧠 ProductOS"]
     end
 
-    Fragmented Reality -->|Unified Context| PO
-    PO -->|Actionable Overview| E[Leadership & Stakeholders]
+    FragmentedReality -->|Unified Context| PO
+    PO -->|Actionable Overview| E["Leadership & Stakeholders"]
 ```
 
 ### ❌ The Old Way
